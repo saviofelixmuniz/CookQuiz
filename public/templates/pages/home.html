@@ -1,0 +1,13 @@
+<img class="logo" src="/assets/img/CookQuiz.png" alt="">
+<div style="text-align: center; margin-top: 10vh">
+    <button style="" class="btn btn-primary" ng-show="!showPassword" ng-click="showPassword = true">Administrador</button>
+    <br>
+    <p ng-show="mismatch" style="text-align: center; display: inline-block; color: firebrick" >Senha incorreta</p>
+    <div id="password">
+        <input style="width: 30%; display: inline-block; text-align: center" type="password" class="form-control" placeholder="senha" ng-show="showPassword"
+        ng-model="password">
+        <br>
+    </div>
+    <button style="margin-top: 3vh" ng-show="!showPassword" class="btn btn-primary" ng-click="goToQuiz()">Aluno</button>
+    <button style="margin-top: 3vh" ng-show="showPassword" class="btn btn-success" ng-click="login(password)">Entrar</button>
+</div>

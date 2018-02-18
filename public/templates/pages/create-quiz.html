@@ -1,0 +1,76 @@
+<nav-bar ng-value="managingQuiz ? 'Gerenciar Quiz' : 'Novo Quiz'"></nav-bar>
+
+<div style="text-align: center; margin-top: 30px" ng-show="managingQuiz">
+    <div class="btn-group" role="group">
+        <button type="button" ng-class="buttonClasses.questionBtn" ng-click="showAnswers(false)">Quiz</button>
+        <button type="button" ng-class="buttonClasses.answerBtn" ng-click="showAnswers(true)">Respostas</button>
+    </div>
+</div>
+
+<form action="" class="container" ng-show="!answersDisplayed">
+    <fieldset>
+
+        <br><br><br>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label">Título: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="título do quiz" ng-model="quiz.title">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label">Grupo: </label>
+            <div class="col-sm-10">
+                <select name="" class="form-control" ng-model="quiz.group">
+                    <option ng-repeat="group in groups" value="{{group._id}}">{{group.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div ng-repeat="question in quiz.questions track by $index">
+            <h3>#{{$index + 1}}</h3>
+            <a style="color: darkblue; cursor: pointer" ng-click="setTrueFalse($index)"> Verdadeiro/Falso? </a>
+            <br><br>
+
+            <div class="form-group">
+                <label for="question">Enunciado</label>
+                <textarea class="form-control" id="question" rows="3" placeholder="texto do enunciado" ng-model="question.title"></textarea>
+            </div>
+            <div class="form-group" ng-repeat="option in question.options track by $index">
+                <input type="radio" class="form-check-input" name="optionsRadios{{question._id}}" ng-value="$index" ng-model="question.correct" style="margin-left: 10px">
+                <label for="optiontext">Opção {{$index + 1}}</label>
+                <input type="text" class="form-control" id="optiontext" placeholder="texto da alternativa" ng-model="question.options[$index]">
+            </div>
+            <div class="row" style="margin-left: 10px">
+                <button type="button" class="btn btn-primary" ng-click="addOption($index)" ng-if="question.options.length < 5">Adicionar opção</button>
+                <button  style="float: right; margin-left: 20px" type="button" class="btn btn-danger" ng-click="removeQuestion($index)" ng-if="question.options.length < 5">Remover questão</button>
+
+            </div>
+            <br><br><br><br>
+        </div>
+
+        <div class="row" style="margin: 30px 0 50px -10px; float: right">
+            <button type="button" class="btn btn-info" ng-click="addQuestion()">Adicionar questão</button>
+            <button type="button" class="btn btn-success" style="margin-left: 10px" ng-click="saveQuiz()">Salvar</button>
+            <button type="button" class="btn btn-secondary" style="margin-left: 10px" ng-click="goBack()">Voltar</button>
+        </div>
+    </fieldset>
+</form>
+
+<table id="table-answers" class="table table-striped" ng-show="answersDisplayed">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col" style="text-align: center">#</th>
+        <th scope="col" style="width: 90%; text-align: left">Nome</th>
+        <th scope="col" style="text-align: center">Nota</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="answer in answers track by $index">
+        <th scope="row">{{$index + 1}}</th>
+        <td>{{answer.user}}</td>
+        <td style="text-align: center">{{answer.score}}</td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+<nav-bar ng-value="'Grupo'"></nav-bar>
+
+<div class="container" style="margin-top: 50px">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" style="text-align: center">#</th>
+            <th scope="col" style="text-align: center">Nome</th>
+            <th scope="col" style="text-align: center">Quiz</th>
+            <th scope="col" style="text-align: center">Questão</th>
+            <th scope="col" style="text-align: center">Nota</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users track by $index">
+            <th scope="row" style="text-align: center">{{$index + 1}}</th>
+            <td style="text-align: center">{{user.name}}</td>
+            <td style="text-align: center">{{user.active_quiz}}</td>
+            <td style="text-align: center">{{user.active_question === -1? 'T' : user.active_question + 1}}</td>
+            <td style="text-align: center">{{user.score}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="text-align: right">
+    <button type="button" class="btn btn-secondary" ng-click="goBack()" style="margin-right: 15%">Voltar</button>
+</div>

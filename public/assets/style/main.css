@@ -1,0 +1,37 @@
+.logo {
+    height: 150px;
+    display: block;
+    margin: 20vh auto 0;
+}
+
+#navbar {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    text-align: center;
+    width: 100%
+}
+
+#navbar-img {
+    height: 60px;
+    display: inline;
+    margin-bottom: 15px
+}
+
+#navbar-text {
+    color: white;
+    display: inline;
+    font-weight: bolder;
+    margin-left: 10px;
+    font-size: 40px;
+}
+
+.list-hover:hover {
+    background-color: #e3e5ff;
+    cursor: pointer;
+}
+
+#table-answers {
+    margin: 50px 25%;
+    width: 50%;
+}

@@ -1,0 +1,38 @@
+<nav-bar ng-value="'Quiz'"></nav-bar>
+
+<div ng-show="!question && !params.isOver">
+    <div style="text-align: center; margin-top: 20vh">
+        <h2 style="font-family: 'Oswald', sans-serif;">Olá!<br>Para participar do quiz<br>digite seu nome e sobrenome abaixo</h2>
+        <p ng-show="params.notAllowed" style="text-align: center; display: inline-block; color: firebrick" >Você já participou deste quiz</p>
+        <br>    
+        <input id="username" type="text" placeholder="digite seu nome e ultimo nome" style="width: 60%;margin-top: 30px" ng-model="username">
+    </div>
+
+    <div style="text-align: right; margin-right: 20%; margin-top: 30px">
+        <button class="btn btn-success" ng-click="start()">Começar!</button>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 40px" ng-show="question && !params.isOver">
+    <div class="form-group" style="margin-bottom: 40px">
+        <h4>#{{params.currentQuestion + 1}} {{question.title}}</h4>
+    </div>
+    <div class="form-group" ng-repeat="option in question.options track by $index">
+        <input type="radio" class="form-check-input" name="optionsRadios{{question._id}}" ng-value="$index" ng-model="params.answer" style="margin-left: 10px">
+        <span id="optiontext">{{question.options[$index]}}</span>
+    </div>
+
+    <div style="text-align: right; margin-right: 20%; margin-top: 30px">
+        <button class="btn btn-primary" ng-click="send(question, params.answer)">Enviar</button>
+    </div>
+</div>
+
+<div ng-if="params.isOver" style="margin-top: 20vh">
+    <div style="text-align: center">
+        <h1 style="font-family: 'Oswald', sans-serif;">Sua nota neste quiz foi:<br></h1>
+        <h1 style="font-family: 'Oswald', sans-serif; color: firebrick">{{params.score}}<br></h1>
+    </div>
+    <div style="text-align: right; margin-right: 20%; margin-top: 30px">
+        <button class="btn btn-secondary" ng-click="goBack()">Voltar</button>
+    </div>
+</div>
