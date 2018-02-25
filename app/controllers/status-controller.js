@@ -24,7 +24,8 @@ function checkUserExistence(req, res) {
                 });
             });
         }
-        RestHelper.sendJsonResponse(res,200, data);
+        else
+            RestHelper.sendJsonResponse(res,200, data);
     }).catch(function (err) {
         RestHelper.sendJsonResponse(res,400, err);
     })
