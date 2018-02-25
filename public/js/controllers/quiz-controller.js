@@ -20,7 +20,7 @@ angular.module('CookinQuiz')
 
     function registerStatus() {
         Answers.createStatus({
-            user : $scope.username,
+            user : $scope.username.toLowerCase(),
             quiz : $scope.quiz.title,
             group : $scope.quiz.group,
             question : $scope.params.currentQuestion
@@ -76,7 +76,7 @@ angular.module('CookinQuiz')
     
     function registerAnswer(score) {
         Answers.create({
-            user : $scope.username,
+            user : $scope.username.toLowerCase(),
             quiz : $scope.quiz._id,
             score : score,
             group : $scope.quiz.group
