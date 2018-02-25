@@ -6,7 +6,7 @@ angular.module('CookinQuiz')
     $rootScope.managingQuiz = undefined;
 
     $scope.params = {
-        active : 0,
+        active : null,
         showGroupInput : false
     };
 
