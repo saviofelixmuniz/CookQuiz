@@ -40,10 +40,14 @@ function getAnswersByGroup(req, res) {
         });
 
         Answers.find(query).then(function (answers) {
-            answers.forEach(function (answer) {
+            answers.forEach(function (answer, index) {
+                if (!users[answer.user])
+                    users[answer.user] = {};
+
                 if (!users[answer.user].score) {
                     users[answer.user].score = answer.score;
                 }
+
                 else {
                     users[answer.user].score += answer.score;
                 }

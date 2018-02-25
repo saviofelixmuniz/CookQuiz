@@ -6,8 +6,7 @@ const Status = require('../models/status');
 const RestHelper = require('../helpers/rest-helper');
 
 function upsertStatus(req, res) {
-    Status.update({ user: req.body.user }, req.body, { upsert: true }).then(function (status) {
-        console.log(status);
+    Status.update({ user: req.body.user, group: req.body.group }, req.body, { upsert: true }).then(function (status) {
         RestHelper.sendJsonResponse(res,201, status);
     }).catch(function (err) {
         RestHelper.sendJsonResponse(res,400, err);
