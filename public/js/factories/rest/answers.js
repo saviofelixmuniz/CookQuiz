@@ -21,6 +21,14 @@ angular.module("CookinQuiz").factory('Answers', function RequestFactory($http) {
 
         getStatus : function (status) {
             return $http.post(API_BASE_PATH + "/status/existence", status, { headers: {'Content-Type': 'application/json; charset=UTF-8' } });
+        },
+
+        updateAnswers: function (oldName, newName) {
+            return $http.put(API_BASE_PATH + "/answers", {old_name : oldName, new_name : newName});
+        },
+
+        deleteStatus : function (user) {
+            return $http.post(API_BASE_PATH + '/status/delete', {user : user},  { headers: {'Content-Type': 'application/json; charset=UTF-8' } });
         }
     }
 });

@@ -19,6 +19,7 @@ router.put('/quiz/inactive/all', quizCtrl.deactivateAll);
 router.get('/quiz/active', quizCtrl.getActive);
 
 router.post('/answers', answersCtrl.createAnswer);
+router.put('/answers', answersCtrl.updateAnswers);
 router.get('/groups/:groupId/answers', answersCtrl.getAnswersByGroup);
 router.get('/quiz/:quizId/answers', answersCtrl.getAnswersByQuiz);
 
@@ -27,5 +28,6 @@ router.get('/groups', groupCtrl.getGroups);
 
 router.post('/status', statusCtrl.upsertStatus);
 router.post('/status/existence', statusCtrl.checkUserExistence);
+router.post('/status/delete', statusCtrl.deleteStatus);
 
 module.exports = router;

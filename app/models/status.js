@@ -21,6 +21,10 @@ const statusSchema = Schema({
         type: Schema.Types.ObjectId,
         ref : "Groups",
         required: true
+    },
+    updated_at : {
+        type: Date,
+        required: true
     }
 }, {collection : 'status'});
 

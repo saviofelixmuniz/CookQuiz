@@ -9,15 +9,30 @@
             <th scope="col" style="text-align: center">Quiz</th>
             <th scope="col" style="text-align: center">Questão</th>
             <th scope="col" style="text-align: center">Nota</th>
+            <th scope="col" style="text-align: center">Editar?</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="user in users track by $index">
             <th scope="row" style="text-align: center">{{$index + 1}}</th>
-            <td style="text-align: center">{{user.name}}</td>
+            <td style="text-align: center" ng-show="!user.editing">{{user.name}}</td>
+            <td ng-show="user.editing" style="text-align: center">
+                <input style="text-align: center" type="text" placeholder="mudar para..." ng-model="user.name">
+            </td>
             <td style="text-align: center">{{user.active_quiz}}</td>
             <td style="text-align: center">{{user.active_question === -1? 'T' : user.active_question + 1}}</td>
             <td style="text-align: center">{{user.score}}</td>
+            <td>
+                <button class="btn btn-warning" ng-show="!user.editing" ng-click="startUserEdit($index)">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-success" ng-show="user.editing" ng-click="saveUserEdit($index)">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="btn btn-danger" ng-click="deleteUser($index)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>

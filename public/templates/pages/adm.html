@@ -8,6 +8,7 @@
             <div style="float: right;">
                 <span class="badge badge-primary badge-pill" ng-click="okok = true;$event.stopPropagation()" style="cursor: pointer">{{quiz.answers}}</span>
                 <input type="radio" class="form-check-input" name="activeRadio" ng-value="$index" ng-model="params.active" ng-click="setActive($index);$event.stopPropagation()" style="margin-left: 0">
+                <button type="button" class="btn btn-info btn-sm" ng-click="duplicate($index);$event.stopPropagation()">x2</button>
             </div>
         </li>
     </ul>
