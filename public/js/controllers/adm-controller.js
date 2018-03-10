@@ -76,5 +76,13 @@ angular.module('CookinQuiz')
             $scope.groups.push(group.data);
             $scope.groupName = '';
         });
+    };
+    
+    $scope.duplicate = function (index) {
+        var quiz = $scope.quizes[index];
+        delete quiz._id;
+        Quiz.create(quiz).then(async function () {
+            init();
+        });
     }
 });

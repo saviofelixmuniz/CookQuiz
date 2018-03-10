@@ -72,8 +72,46 @@ function getAnswersByGroup(req, res) {
     })
 }
 
+function updateAnswers(req, res) {
+    console.log(req.body.old_name)
+    console.log(req.body.new_name)
+    Answers.update({user : req.body.old_name}, {$set : { user : req.body.new_name}}).then(async function (update) {
+        var status = {
+            oldNameStatus: null,
+            newNameStatus: null
+        };
+
+        await Status.findOne({user: req.body.old_name}).then(function (oldNameStatus) {
+            status.oldNameStatus = oldNameStatus;
+        });
+
+        await Status.findOne({user: req.body.new_name}).then(function (newNameStatus) {
+            status.newNameStatus = newNameStatus;
+        });
+
+        if (!status.newNameStatus || Object.keys(status.newNameStatus).length === 0) {
+            RestHelper.sendJsonResponse(res,200,update);
+            return;
+        }
+
+        var isOldNameLastUpdate = status.oldNameStatus.updated_at > status.newNameStatus.updated_at;
+
+        if (!isOldNameLastUpdate)
+            await Status.remove({user: req.body.old_name}).then(function () {});
+        else {
+            await Status.remove({user: req.body.new_name}).then(function () {});
+            await Status.update({user : req.body.old_name}, {$set : {user : req.body.new_name}}).then(function () {});
+        }
+
+        RestHelper.sendJsonResponse(res, 200, update);
+    }, function (err) {
+        RestHelper.sendJsonResponse(res, 400, err)
+    });
+}
+
 module.exports = {
     createAnswer : createAnswer,
     getAnswersByQuiz : getAnswersByQuiz,
-    getAnswersByGroup : getAnswersByGroup
+    getAnswersByGroup : getAnswersByGroup,
+    updateAnswers : updateAnswers
 };
